@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:robot_world/robot_world/class/main_route.dart';
 import 'demo/list_view.dart';
 import 'demo/list_view.dart';
 import 'page/dis.dart';
@@ -36,8 +37,10 @@ import 'bp_project/class/outlook_result_page.dart';
 import 'demo/refresh_demo.dart';
 import 'demo/expansionTile_demo.dart';
 import 'demo/map_demo.dart';
+import 'package:robot_world/robot_world/class/robor_world_home.dart';
+import 'package:robot_world/robot_world/class/robor_world_home.dart';
 final routes = {
-  '/': (context,{arguments}) => Home(),
+  // '/': (context,{arguments}) => Home(),
   '/dis': (context,{arguments}) => Dis(),
   '/test': (context, {arguments}) => Test(),
   '/listView': (context,{arguments}) => simpleListView(),
@@ -73,6 +76,8 @@ final routes = {
   '/RefreshDemo': (context,{arguments}) => RefreshDemo(),
   '/ExpansionTileDemo': (context,{arguments}) => ExpansionTileDemo(),
   '/MapDemo': (context,{arguments}) => MapDemo(),
+  '/RobotWorldHome': (context,{arguments}) => RobotWorldHome(),
+  '/MainRoute': (context,{arguments}) => ScaffoldRoute(),
 
 };
 

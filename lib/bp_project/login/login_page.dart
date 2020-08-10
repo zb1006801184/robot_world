@@ -6,15 +6,18 @@ import 'dart:ui';
 
 class LoginPageView extends StatelessWidget {
   _getLogin(context) async {
-    LoginPerson response = await ApiService.login("15070925726", "1234");
-    if (response != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool(DataName.LOGINSTATE, true);
-      String data = jsonEncode(response.toJson());
-      prefs.setString(DataName.PERSONINFO, data);
-      Global.profile = response;
-      Navigator.pushNamed(context, "/Person");
-    }
+    // LoginPerson response = await ApiService.login("15070925726", "1234");
+    // if (response != null) {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setBool(DataName.LOGINSTATE, true);
+    //   String data = jsonEncode(response.toJson());
+    //   prefs.setString(DataName.PERSONINFO, data);
+    //   Global.profile = response;
+    //   Navigator.pushNamed(context, "/Person");
+    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(DataName.LOGINSTATE, true);
+    Navigator.pushNamed(context, "/RobotWorldHome");
   }
 
   @override

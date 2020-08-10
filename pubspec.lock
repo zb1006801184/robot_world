@@ -9,7 +9,7 @@ packages:
     source: hosted
     version: "0.9.5"
   amap_location_fluttify:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: amap_location_fluttify
       url: "https://pub.flutter-io.cn"

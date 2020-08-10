@@ -10,23 +10,27 @@ import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 // import 'package:flutter_i18n/flutter_i18n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Global.init().then((e) {
-    debugPaintSizeEnabled = false; //调试模式
-    // if (Global.loginState == null || Global.loginState == false) {
-    //   runApp(Login());
-    // } else {
-    //   runApp(MyApp());
-    // }
-    runApp(TestDemo());
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  });
-
-  await enableFluttifyLog(true);
+  await enableFluttifyLog(false);
   await AmapService.instance.init(
     iosKey: 'cbe00823663a07e543d2d54430432272',
     androidKey: '7c9daac55e90a439f7b4304b465297fa',
     webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
   );
+  await AmapCore.init('cbe00823663a07e543d2d54430432272');
+  
+  Global.init().then((e) {
+    debugPaintSizeEnabled = false; //调试模式
+    if (Global.loginState == null || Global.loginState == false) {
+      runApp(Login());
+    } else {
+      runApp(MyApp());
+    }
+    // runApp(TestDemo());
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  });
+
+  
+
 }
 
 class TestDemo extends StatefulWidget {
@@ -46,17 +50,14 @@ class _TestDemoState extends State<TestDemo> {
 
     return new MaterialApp(
       // App名字
-      title: 'bp_online',
-      // App主题
-      // theme: new ThemeData(
-      //   primarySwatch: Colors.orange,
-      // ),
-      // 主页
-      // home: Home(),
+      title: 'robot_world',
       initialRoute: '/',
       onGenerateRoute: onGenerateRoute,
       routes: routes,
       debugShowCheckedModeBanner: true,
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+      ),
       localizationsDelegates: [
         S.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -74,7 +75,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Navigation',
-      initialRoute: '/Person',
+      initialRoute: '/MainRoute',
       onGenerateRoute: onGenerateRoute,
       routes: routes,
       debugShowCheckedModeBanner: true, //debug标识
