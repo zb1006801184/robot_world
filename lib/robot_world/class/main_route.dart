@@ -34,7 +34,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
           ],
           leading: Builder(
           builder: (context) => IconButton(
-                icon: Image(image: AssetImage("images/robot_world/me.png")),
+                icon: Image(image: AssetImage("images/me.png")),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
         ),
@@ -101,7 +101,7 @@ class MyDrawer extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ClipOval(
                       child: Image.asset(
-                        "images//robot_world/nav_icon_me.png",
+                        "images/nav_icon_me.png",
                         width: 80,
                       ),
                     ),
