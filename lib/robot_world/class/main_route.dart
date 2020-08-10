@@ -33,11 +33,11 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
             // IconButton(icon: Icon(Icons.share), onPressed: () {}),
           ],
           leading: Builder(
-          builder: (context) => IconButton(
-                icon: Image(image: AssetImage("images/me.png")),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-        ),
+            builder: (context) => IconButton(
+              icon: Image(image: AssetImage("images/me@2x.png")),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
         ),
         drawer: new MyDrawer(), //抽屉
         bottomNavigationBar: BottomNavigationBar(
@@ -93,25 +93,30 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 38.0),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ClipOval(
-                      child: Image.asset(
-                        "images/nav_icon_me.png",
-                        width: 80,
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 38.0),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: ClipOval(
+                        child: Image.asset(
+                          "images/nav_icon_me@2x.png",
+                          width: 80,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "机器人世界",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                ],
+                    Text(
+                      "机器人世界",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
               ),
+              onTap: (){
+                print("点击了头像");
+              },
             ),
             Expanded(
               child: ListView(
