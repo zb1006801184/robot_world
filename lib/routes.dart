@@ -39,6 +39,8 @@ import 'demo/expansionTile_demo.dart';
 import 'demo/map_demo.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
+import 'robot_world/robot_center.dart';
+
 final routes = {
   // '/': (context,{arguments}) => Home(),
   '/dis': (context,{arguments}) => Dis(),
@@ -78,6 +80,7 @@ final routes = {
   '/MapDemo': (context,{arguments}) => MapDemo(),
   '/RobotWorldHome': (context,{arguments}) => RobotWorldHome(),
   '/MainRoute': (context,{arguments}) => ScaffoldRoute(),
+  '/RobotCenter': (context,{arguments}) => RobotCenter(),
 
 };
 

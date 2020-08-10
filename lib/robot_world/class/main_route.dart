@@ -1,3 +1,4 @@
+
 import 'package:robot_world/page_index.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
 
@@ -83,6 +84,10 @@ class MyDrawer extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  _pushToRobotCenter(BuildContext context) {
+    Navigator.of(context).pushNamed("/RobotCenter");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -114,8 +119,8 @@ class MyDrawer extends StatelessWidget {
                   ],
                 ),
               ),
-              onTap: (){
-                print("点击了头像");
+              onTap: () {
+                _pushToRobotCenter(context);
               },
             ),
             Expanded(
