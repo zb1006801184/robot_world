@@ -17,7 +17,7 @@ class LoginPageView extends StatelessWidget {
     // }
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(DataName.LOGINSTATE, true);
-    Navigator.pushNamed(context, "/ScaffoldRoute");
+    Navigator.pushNamed(context, "/MainRoute");
   }
 
   @override

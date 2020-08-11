@@ -1,7 +1,6 @@
 import 'package:robot_world/page_index.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class RobotWorldHome extends StatefulWidget {
   @override
