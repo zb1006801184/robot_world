@@ -27,7 +27,6 @@ class _RobotCenterState extends State<RobotCenter> {
                 _buildRobotItem(context, "", "高考报名机器人", "根据您所在省份、分数和打算报考的方向…"),
                 _buildLine(),
                 _buildRobotItem(context, "", "在线小说机器人", "根据您喜欢看的分类为您推送最新的火热小…"),
-                _buildLine(),
               ],
             )));
   }

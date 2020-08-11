@@ -1,6 +1,6 @@
 
 import 'package:robot_world/page_index.dart';
-import 'package:robot_world/robot_world/class/robor_world_home.dart';
+// import 'package:robot_world/robot_world/class/robor_world_home.dart';
 
 class ScaffoldRoute extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
 
   Widget itemViewC() {
     if (_selectedIndex == 0) {
-      return RobotWorldHome();
+      // return RobotWorldHome();
     }
 
     return Container(

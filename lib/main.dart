@@ -9,14 +9,7 @@ import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 
 // import 'package:flutter_i18n/flutter_i18n.dart';
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await enableFluttifyLog(false);
-  await AmapService.instance.init(
-    iosKey: 'cbe00823663a07e543d2d54430432272',
-    androidKey: '7c9daac55e90a439f7b4304b465297fa',
-    webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
-  );
-  await AmapCore.init('cbe00823663a07e543d2d54430432272');
+  
   
   Global.init().then((e) {
     debugPaintSizeEnabled = false; //调试模式
@@ -28,7 +21,14 @@ void main() async {
     // runApp(TestDemo());
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   });
-
+WidgetsFlutterBinding.ensureInitialized();
+  await enableFluttifyLog(false);
+  await AmapService.instance.init(
+    iosKey: 'cbe00823663a07e543d2d54430432272',
+    androidKey: '7c9daac55e90a439f7b4304b465297fa',
+    webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
+  );
+  await AmapCore.init('cbe00823663a07e543d2d54430432272');
   
 
 }
