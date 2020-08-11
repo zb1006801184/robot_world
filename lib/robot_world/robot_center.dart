@@ -43,7 +43,8 @@ class _RobotCenterState extends State<RobotCenter> {
               margin: EdgeInsets.only(left: 16),
               height: 76,
               width: 76,
-              color: Colors.red),
+              child: Image(image: AssetImage("images/nav_icon_me.png"),fit: BoxFit.fill,),
+              ),
           Expanded(
               child: Container(
             child: Column(
@@ -121,7 +122,7 @@ class _RobotCenterState extends State<RobotCenter> {
     );
   }
 
-  //标题
+  //标题header
   Widget _buildHeadTitle(String title) {
     return Container(
       height: 38,

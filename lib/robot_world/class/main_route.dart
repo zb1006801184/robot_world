@@ -35,7 +35,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
           ],
           leading: Builder(
             builder: (context) => IconButton(
-              icon: Image(image: AssetImage("images/me@2x.png")),
+              icon: Image(image: AssetImage("images/me.png")),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
@@ -100,14 +100,14 @@ class MyDrawer extends StatelessWidget {
           children: <Widget>[
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.only(top: 38.0),
+                padding: const EdgeInsets.only(top: 27.0),
                 child: Row(
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ClipOval(
                         child: Image.asset(
-                          "images/nav_icon_me@2x.png",
+                          "images/nav_icon_me.png",
                           width: 80,
                         ),
                       ),
@@ -123,20 +123,20 @@ class MyDrawer extends StatelessWidget {
                 _pushToRobotCenter(context);
               },
             ),
-            Expanded(
-              child: ListView(
-                children: <Widget>[
-                  ListTile(
-                    leading: const Icon(Icons.add),
-                    title: const Text('Add account'),
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Manage accounts'),
-                  ),
-                ],
-              ),
-            ),
+            // Expanded(
+            //   child: ListView(
+            //     children: <Widget>[
+            //       ListTile(
+            //         leading: const Icon(Icons.add),
+            //         title: const Text('Add account'),
+            //       ),
+            //       ListTile(
+            //         leading: const Icon(Icons.settings),
+            //         title: const Text('Manage accounts'),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
