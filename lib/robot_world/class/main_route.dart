@@ -1,7 +1,7 @@
 
 import 'package:robot_world/page_index.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
-
+import 'dart:io';
 class ScaffoldRoute extends StatefulWidget {
   @override
   _ScaffoldRouteState createState() => _ScaffoldRouteState();
@@ -12,7 +12,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   String title = "R世界";
 
   Widget itemViewC() {
-    if (_selectedIndex == 0) {
+    if (_selectedIndex == 0 && (Platform.isAndroid || Platform.isIOS)) {
       return RobotWorldHome();
     }
 

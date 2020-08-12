@@ -48,7 +48,8 @@ dependencies:
   #国际化
   # flutter_i18n: ^0.18.0
   #地图
-  amap_map_fluttify: ^0.25.0
+  amap_map_fluttify: 
+    path: ../amap_map_fluttify
   amap_location_fluttify: ^0.14.0+1
   permission_handler: ^5.0.1+1
 

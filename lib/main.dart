@@ -22,10 +22,10 @@ void main() async {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   });
   await enableFluttifyLog(false);
-  await AmapService.instance.init(
+  await AmapService.init(
     iosKey: 'cbe00823663a07e543d2d54430432272',
     androidKey: '7c9daac55e90a439f7b4304b465297fa',
-    webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
+    // webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
   );
   await AmapCore.init('cbe00823663a07e543d2d54430432272');
   
