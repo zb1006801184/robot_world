@@ -30,8 +30,13 @@ class RobotWorldHome extends StatefulWidget {
   _RobotWorldHomeState createState() => _RobotWorldHomeState();
 }
 
-class _RobotWorldHomeState extends State<RobotWorldHome> {
+class _RobotWorldHomeState extends State<RobotWorldHome>
+    with SingleTickerProviderStateMixin {
   @override
+  //动画
+  Animation<double> animation;
+  AnimationController animationController;
+  //
   AmapController _controller;
   LatLng lat = LatLng(39.89, 116.32);
   SmoothMoveMarker _moveMarker;
@@ -78,8 +83,10 @@ class _RobotWorldHomeState extends State<RobotWorldHome> {
     );
     //点击mark
     _controller.setMarkerClickedListener((marker) async {
-      
-      _controller.clearMarkers([marker]);
+      // marker.setCoordinate(getNextLatLng());
+
+      // _controller.clearMarkers([marker]);
+
       // await _controller.showCustomInfoWindow(
       //   marker,
       //   Container(
@@ -94,21 +101,23 @@ class _RobotWorldHomeState extends State<RobotWorldHome> {
       // );
     });
     //添加平移
-    _moveMarker = await _controller?.addSmoothMoveMarker(
+    _moveMarker = await _controller
+        ?.addSmoothMoveMarker(
       SmoothMoveMarkerOption(
-        path: [getNextLatLng(), lat, getNextLatLng()],
+        path: [getNextLatLng(), lat],
         iconProvider: AssetImage("images/me.png"),
         duration: Duration(seconds: 10),
       ),
-    );
+    )
+        .then((value) {
+      _controller.clear(keepMyLocation: true);
+      _controller.addMarker(_mark_option1);
+    });
+
     //暂停
     Future.delayed(
       Duration(seconds: 3),
-      () {
-        _moveMarker.stop();
-        // SmoothMoveMarker.android(mar)
-        // _controller.clearMarkers([_moveMarker]);
-      },
+      () {},
     );
     //添加widgetmark
     final marker = await _controller?.addMarkers(
