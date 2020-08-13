@@ -38,10 +38,21 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
   AnimationController animationController;
   //
   AmapController _controller;
-  LatLng lat = LatLng(39.89, 116.32);
+  //机器人B到达的位置
+  LatLng lat = LatLng(39.958707425776154, 116.44922317658235);
+  //机器人B开始的位置
+  LatLng lat1 = LatLng(39.959707425776154, 116.45012317658235);
+  //机器人A的位置
+  LatLng lat2 = LatLng(39.958707425776154, 116.44912317658235);
+
   SmoothMoveMarker _moveMarker;
 
   List<Marker> markers = [];
+  List<MarkerOption> markerOptionS = [];
+
+  Timer _timer;
+  bool showBoxA = true;
+  int count = 0;
 
   final random = Random();
 
@@ -63,12 +74,29 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     super.initState();
   }
 
+//原点
   MarkerOption _mark_option1 = MarkerOption(
-      latLng: LatLng(39.89, 116.32),
-      title: "你好啊！我是机器人！",
+      latLng: LatLng(39.958707425776154, 116.44912317658235),
+      title: "你好啊！我是机器人A！",
       snippet: "小谛",
       infoWindowEnabled: true,
       iconProvider: AssetImage("images/me.png"));
+  MarkerOption _mark_option2 = MarkerOption(
+      latLng: LatLng(39.958707425776154, 116.44922317658235),
+      title: "你好啊！我是机器人B！",
+      snippet: "小谛",
+      infoWindowEnabled: true,
+      iconProvider: AssetImage("images/me.png"));
+
+  MarkerOption getAddMark(String title, LatLng latlng){
+    return  MarkerOption(
+      latLng: latlng,
+      title: title,
+      snippet: "小谛",
+      infoWindowEnabled: true,
+      iconProvider: AssetImage("images/me.png"));
+  }
+
 
   _mapCallBack() async {
     //获取定位权限
@@ -77,48 +105,64 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     _controller.showMyLocation(MyLocationOption(show: true));
     //添加mark
     _controller.addMarker(_mark_option1);
+    markerOptionS.add(_mark_option1);
+
     //点击弹窗
     _controller.setInfoWindowClickListener(
       (marker) => _clickInfo(marker),
     );
     //点击mark
     _controller.setMarkerClickedListener((marker) async {
-      // marker.setCoordinate(getNextLatLng());
 
-      // _controller.clearMarkers([marker]);
-
-      // await _controller.showCustomInfoWindow(
-      //   marker,
-      //   Container(
-      //     width: 128,
-      //     height: 60,
-      //     decoration: BoxDecoration(
-      //       color: Colors.yellow,
-      //       borderRadius: BorderRadius.circular(16),
-      //     ),
-      //     child: Text(await marker.title),
-      //   ),
-      // );
+      await _controller.showCustomInfoWindow(
+        marker,
+        Container(
+          width: 128,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.yellow,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Text("111"),
+        ),
+      );
     });
     //添加平移
-    _moveMarker = await _controller
-        ?.addSmoothMoveMarker(
+    _moveMarker = await _controller?.addSmoothMoveMarker(
       SmoothMoveMarkerOption(
-        path: [getNextLatLng(), lat],
+        path: [lat1, lat],
         iconProvider: AssetImage("images/me.png"),
         duration: Duration(seconds: 10),
       ),
-    )
-        .then((value) {
-      _controller.clear(keepMyLocation: true);
-      _controller.addMarker(_mark_option1);
-    });
+    );
 
     //暂停
     Future.delayed(
-      Duration(seconds: 3),
-      () {},
-    );
+      Duration(seconds: 10),
+      () async {
+        _controller.clear(keepMyLocation: true);
+        Marker mark1 = await _controller.addMarker(_mark_option1);
+        markers.add(mark1);
+        Marker mark2 = await _controller.addMarker(_mark_option2);
+        markers.add(mark2);
+      },
+    ).then((value) async{
+      Marker markr = markers[0];
+      Marker markr1 = markers[1];
+      _timer = Timer.periodic(Duration(milliseconds: 3000), (t) async{
+        showBoxA = !showBoxA;
+        count++;
+        if (showBoxA == true) {
+        _controller.clearMarkers([markr]);
+        markr =  await _controller.addMarker(getAddMark("你好啊,请问你是谁？${count}", lat2));
+        markr.showInfoWindow();
+        } else {
+        _controller.clearMarkers([markr1]);
+        markr1 =  await _controller.addMarker(getAddMark("你好啊，我是机器人啊${count}", lat));
+        markr1.showInfoWindow();
+        }
+      });
+    });
     //添加widgetmark
     final marker = await _controller?.addMarkers(
       [
@@ -148,7 +192,8 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
   }
 
   _showBox(Marker _marker) {
-    _marker.showInfoWindow();
+    // _marker.showInfoWindow();
+    // _moveMarker.showInfoWindow();
   }
 
   @override
@@ -163,8 +208,10 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
               centerCoordinate: lat,
               showCompass: true,
               showZoomControl: true,
-              showScaleControl: true,
-              zoomLevel: 6,
+              // showScaleControl: true,
+              // zoomGesturesEnabled: false,
+              tiltGestureEnabled: false,
+              zoomLevel: 19,
               onMarkerClicked: (Marker marker) {
                 print(marker.iosModel.get_title());
               },
@@ -172,14 +219,14 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
                 print(coord);
               },
               markers: [
-                // _mark_option,
                 // _mark_option1,
+                // _mark_option2,
               ],
               onMapCreated: (controller) async {
                 _controller = controller;
-
                 _mapCallBack();
               },
+              autoRelease: true,
             ),
           )),
         ],

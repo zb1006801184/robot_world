@@ -1,7 +1,7 @@
-
 import 'package:robot_world/page_index.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
 import 'dart:io';
+
 class ScaffoldRoute extends StatefulWidget {
   @override
   _ScaffoldRouteState createState() => _ScaffoldRouteState();
@@ -10,17 +10,24 @@ class ScaffoldRoute extends StatefulWidget {
 class _ScaffoldRouteState extends State<ScaffoldRoute> {
   int _selectedIndex = 0;
   String title = "R世界";
+  List<Widget> bodyList;
 
-  Widget itemViewC() {
-    if (_selectedIndex == 0 && (Platform.isAndroid || Platform.isIOS)) {
-      return RobotWorldHome();
+  RobotWorldHome home = RobotWorldHome();
+  Widget itemViewC(int index) {
+    List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
+    if (index == 0 && (Platform.isAndroid || Platform.isIOS)) {
+      return home;
     }
-
     return Container(
       child: Center(
-        child: Text(title),
+        child: Text(titles[index]),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -61,18 +68,23 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
           unselectedItemColor: Colors.black,
           onTap: _onItemTapped,
         ),
-        // floatingActionButton: FloatingActionButton(
-        //     //悬浮按钮
-        //     child: Icon(Icons.add),
-        //     onPressed: _onAdd),
-        body: itemViewC());
+        
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            itemViewC(0),
+            itemViewC(1),
+            itemViewC(2),
+            itemViewC(3),
+            itemViewC(4),
+          ],
+        ));
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
-      title = titles[_selectedIndex];
+     
     });
   }
 
