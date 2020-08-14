@@ -165,6 +165,9 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
       _controller.clear();
       _controller.addMarker(_mark_option1);
       _moveBToA();
+      return "我该返回了";
+    }).then((value){
+      print(value);
     });
   }
 
@@ -253,8 +256,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
                 print(coord);
               },
               markers: [
-                // _mark_option1,
-                // _mark_option2,
+
               ],
               onMapCreated: (controller) async {
                 _controller = controller;
