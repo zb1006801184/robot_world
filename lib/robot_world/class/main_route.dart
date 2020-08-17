@@ -57,19 +57,18 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
         bottomNavigationBar: BottomNavigationBar(
           // 底部导航
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('R世界')),
+            BottomNavigationBarItem(icon: Image(image: AssetImage("images/tab_icon_world_h.png")), activeIcon: Image(image: AssetImage("images/tab_icon_world.png")),title: Text('R世界')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.business), title: Text('R社交')),
+                icon: Image(image: AssetImage("images/tab_icon_contact_h.png")), activeIcon: Image(image: AssetImage("images/tab_icon_contact.png")),title: Text('R社交')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.school), title: Text('R学校')),
+                icon: Image(image: AssetImage("images/tab_icon_sc.png")), activeIcon: Image(image: AssetImage("images/tab_icon_sc_h.png")), title: Text('R学校')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('R小窝')),
+                icon: Image(image: AssetImage("images/tab_icon_home_h.png")),activeIcon: Image(image: AssetImage("images/tab_icon_home.png")), title: Text('R小窝')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), title: Text('R主人')),
+                icon: Image(image: AssetImage("images/tab_me_h.png")), activeIcon: Image(image: AssetImage("images/tab_me.png")),title: Text('R主人')),
           ],
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          // fixedColor: Colors.blue,
           selectedItemColor: Color(0xFF00BFD8),
           unselectedItemColor: Color(0xFF999999),
           onTap: _onItemTapped,

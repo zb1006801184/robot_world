@@ -103,7 +103,7 @@ class _RobotWorldSchoolState extends State<RobotWorldSchool> {
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
       child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),//禁止滑动
+        physics: NeverScrollableScrollPhysics(), //禁止滑动
         crossAxisCount: 3,
         childAspectRatio: 1,
         crossAxisSpacing: 1, //横着
