@@ -56,6 +56,9 @@ dependencies:
   decorated_flutter: ^0.15.0
   # tab
   tab_indicator_styler: ^1.0.0
+  #进度条
+  step_progress_indicator: ^0.2.3+6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

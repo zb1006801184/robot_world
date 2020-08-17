@@ -175,7 +175,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     //获取定位权限
     await Permission.locationWhenInUse.request();
     //展示我的位置
-    _controller.showMyLocation(MyLocationOption(show: true));
+    _controller.showMyLocation(MyLocationOption(show: true,fillColor:Color(0xFFFFFF).withOpacity(0),myLocationType: MyLocationType.Locate,iconProvider: AssetImage("images/map_icon_location.png")));
     //添加mark
     _controller.addMarker(_mark_option1);
     markerOptionS.add(_mark_option1);

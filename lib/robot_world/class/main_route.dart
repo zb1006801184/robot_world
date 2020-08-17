@@ -15,7 +15,8 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
 
   Widget itemViewC(int index) {
-    if (index == 0 && (Platform.isAndroid || Platform.isIOS)) {
+    
+    if (index == 0 && !PlatformUtils.isWeb) {
       return RobotWorldHome();
     }
     if (index == 2) {
