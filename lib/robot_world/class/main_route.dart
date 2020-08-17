@@ -1,6 +1,7 @@
 import 'package:robot_world/page_index.dart';
 import 'package:robot_world/robot_world/class/robor_world_home.dart';
 import 'dart:io';
+import 'school/robot_world_school.dart';
 
 class ScaffoldRoute extends StatefulWidget {
   @override
@@ -11,12 +12,14 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   int _selectedIndex = 0;
   String title = "R世界";
   List<Widget> bodyList;
+  List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
 
-  RobotWorldHome home = RobotWorldHome();
   Widget itemViewC(int index) {
-    List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
     if (index == 0 && (Platform.isAndroid || Platform.isIOS)) {
-      return home;
+      return RobotWorldHome();
+    }
+    if (index == 2) {
+      return RobotWorldSchool();
     }
     return Container(
       child: Center(
@@ -35,7 +38,10 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
     return Scaffold(
         appBar: AppBar(
           //导航栏
-          title: Text(title),
+          title: Text(title,style: TextStyle(color: Color(0xFF121212)),),
+          backgroundColor: Colors.white,
+          elevation: 0, //阴影辐射范围
+          brightness: Brightness.light,
           actions: <Widget>[
             //导航栏右侧菜单
             // IconButton(icon: Icon(Icons.share), onPressed: () {}),
@@ -64,11 +70,10 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           // fixedColor: Colors.blue,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.black,
+          selectedItemColor: Color(0xFF00BFD8),
+          unselectedItemColor: Color(0xFF999999),
           onTap: _onItemTapped,
         ),
-        
         body: IndexedStack(
           index: _selectedIndex,
           children: [
@@ -84,7 +89,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-     
+      title = titles[index];
     });
   }
 
