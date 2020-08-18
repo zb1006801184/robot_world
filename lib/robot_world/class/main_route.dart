@@ -24,9 +24,9 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
     if (index == 3) {
       return RobotCenter();
     }
-    if (index == 1) {
-      return ContactPage();
-    }
+    // if (index == 1) {
+    //   return ContactPage();
+    // }
 
     return Container(
       child: Center(
@@ -47,7 +47,9 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
       if (_selectedIndex == 1) {
         return IconButton(
             icon: Image(image: AssetImage("images/nav_contacts.png")),
-            onPressed: () {});
+            onPressed: () {
+              Navigator.of(context).pushNamed("/ContactPage");
+            });
       }
       return Container();
     }

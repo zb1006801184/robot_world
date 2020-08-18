@@ -274,7 +274,7 @@ packages:
     source: hosted
     version: "1.0.2"
   lpinyin:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: lpinyin
       url: "https://pub.flutter-io.cn"

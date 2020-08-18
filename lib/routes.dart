@@ -41,7 +41,7 @@ import 'package:robot_world/robot_world/class/robor_world_home.dart';
 import 'robot_world/robot_center.dart';
 import 'robot_world/class/main_route.dart';
 import 'robot_world/class/school/robot_message.dart';
-
+import 'robot_world/class/contacts/contacts_page.dart';
 final routes = {
   // '/': (context,{arguments}) => Home(),
   '/dis': (context, {arguments}) => Dis(),
@@ -83,7 +83,8 @@ final routes = {
   '/MainRoute': (context, {arguments}) => ScaffoldRoute(),
   '/RobotCenter': (context, {arguments}) => RobotCenter(),
   '/RobotMessage': (context, {arguments}) => RobotMessage(),
-  
+    '/ContactPage': (context, {arguments}) => ContactPage(),
+
 };
 
 var onGenerateRoute = (RouteSettings settings) {
