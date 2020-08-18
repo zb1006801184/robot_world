@@ -24,13 +24,7 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   void loadData() async {
-    _hotCityList.add(CityInfo(name: "北京市", tagIndex: "★"));
-    _hotCityList.add(CityInfo(name: "广州市", tagIndex: "★"));
-    _hotCityList.add(CityInfo(name: "成都市", tagIndex: "★"));
-    _hotCityList.add(CityInfo(name: "深圳市", tagIndex: "★"));
-    _hotCityList.add(CityInfo(name: "杭州市", tagIndex: "★"));
-    _hotCityList.add(CityInfo(name: "武汉市", tagIndex: "★"));
-
+    
     //加载城市列表
     rootBundle.loadString('data/china.json').then((value) {
       Map countyMap = json.decode(value);
@@ -40,7 +34,7 @@ class _ContactPageState extends State<ContactPage> {
       });
       _handleList(_cityList);
       setState(() {
-        _suspensionTag = _hotCityList[0].getSuspensionTag();
+        _suspensionTag = _cityList[0].getSuspensionTag();
       });
     });
   }
