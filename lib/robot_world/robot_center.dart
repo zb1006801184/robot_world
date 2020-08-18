@@ -9,9 +9,8 @@ class RobotCenter extends StatefulWidget {
 class _RobotCenterState extends State<RobotCenter> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: NavBarBase().configAppBarRobot("机器人中心", context),
-        body: Container(
+    return 
+         Container(
             color: Colors.white,
             child: ListView(
               children: [
@@ -31,7 +30,7 @@ class _RobotCenterState extends State<RobotCenter> {
                 _buildLine(),
                 _buildRobotItem(context, "", "在线小说机器人", "根据您喜欢看的分类为您推送最新的火热小…"),
               ],
-            )));
+            ));
   }
 
   //个人信息

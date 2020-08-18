@@ -116,7 +116,8 @@ class _RobotWorldSchoolState extends State<RobotWorldSchool> {
   List<Widget> _item(List datas) {
     List<Widget> result = [];
     for (var item in datas) {
-      result.add(Container(
+      result.add(GestureDetector(
+          child: Container(
         padding: EdgeInsets.only(bottom: 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,6 +136,10 @@ class _RobotWorldSchoolState extends State<RobotWorldSchool> {
             )
           ],
         ),
+      ),
+      onTap:(){
+        Navigator.of(context).pushNamed("/RobotMessage");
+      } 
       ));
     }
     return result;
