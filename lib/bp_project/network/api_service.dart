@@ -63,7 +63,8 @@ class ApiService {
   //机器人列表
 static Future<List<RobotModel>>getRobotListData(Map<String ,dynamic> params) async{
   Response response = await HttpUtils(
-            headers: {"Authorization": "Bearer ${Global.profile.accessToken}","Content-type":"application/json"})
+            // headers: {"Authorization": "Bearer ${Global.profile.accessToken}","Content-type":"application/json"}
+            )
         .request(ApiUrl.ROBOT_LIST, method: HttpUtils.GET, data: params);
     if (response != null) {
       var responseData = jsonDecode(response.data);
