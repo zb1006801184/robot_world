@@ -48,7 +48,7 @@ class HttpUtils {
   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
     client.findProxy = (Uri) {
       // 用1个开关设置是否开启代理
-      return  'PROXY 192.168.3.139:8888';
+      return  'PROXY 192.168.3.138:8888';
     };
   };
 

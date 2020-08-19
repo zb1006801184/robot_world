@@ -33,6 +33,30 @@ class _ChatPageState extends State<ChatPage> {
 
   //头像
   Widget _buildHeadIcon([int index]) {
+    //显示未读数
+    Widget _buildNum() {
+      if (index == 0) {
+        return Positioned(
+            top: 15,
+            right: 0,
+            child: Container(
+              width: 25,
+              height: 17,
+              decoration: BoxDecoration(
+                color: Color(0xFFFF6951),
+                borderRadius: BorderRadius.all(Radius.circular(8.5)),
+              ),
+              child: Center(
+                child: Text(
+                  "3",
+                  style: TextStyle(fontSize: 11, color: Colors.white),
+                ),
+              ),
+            ));
+      }
+      return Container();
+    }
+
     return Container(
       width: 70,
       height: 73,
@@ -47,20 +71,7 @@ class _ChatPageState extends State<ChatPage> {
               fit: BoxFit.fill,
             ),
           ),
-          Positioned(
-              top: 15,
-              right: 0,
-              child: Container(
-                width: 25,
-                height: 17,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFF6951),
-                  borderRadius: BorderRadius.all(Radius.circular(8.5)),
-                ),
-                child: Center(
-                  child: Text("3",style: TextStyle(fontSize: 11,color: Colors.white),),
-                ),
-              ))
+          _buildNum(),
         ],
       ),
     );

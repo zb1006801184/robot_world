@@ -1,13 +1,11 @@
 import 'package:robot_world/bp_project/models/form_data_model.dart';
 import 'package:robot_world/bp_project/models/from_list_model.dart';
-
 import 'http_utils.dart';
 import 'api_url.dart';
-import 'base_result.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:robot_world/page_index.dart';
-
+import '../../model/robot_model.dart';
 class ApiService {
 //登录
   static Future<LoginPerson> login(
@@ -61,4 +59,24 @@ class ApiService {
       return null;
     }
   }
+
+  //机器人列表
+static Future<List<RobotModel>>getRobotListData(Map<String ,dynamic> params) async{
+  Response response = await HttpUtils(
+            headers: {"Authorization": "Bearer ${Global.profile.accessToken}","Content-type":"application/json"})
+        .request(ApiUrl.ROBOT_LIST, method: HttpUtils.GET, data: params);
+    if (response != null) {
+      var responseData = jsonDecode(response.data);
+      List listData = responseData["datas"];
+      List data = [];
+      if (listData == null) {
+        return null;
+      }
+      return List()
+        ..addAll((listData ?? []).map((o) => RobotModel.fromJson(o)));
+    } else {
+      return null;
+    }
+}
+
 }

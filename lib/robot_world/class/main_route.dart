@@ -3,6 +3,8 @@ import 'package:robot_world/robot_world/class/robor_world_home.dart';
 import 'school/robot_world_school.dart';
 import '../robot_center.dart';
 import 'contacts/chat_page.dart';
+import 'owner/owner_page.dart';
+
 class ScaffoldRoute extends StatefulWidget {
   @override
   _ScaffoldRouteState createState() => _ScaffoldRouteState();
@@ -15,24 +17,19 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
 
   Widget itemViewC(int index) {
-    if (index == 0 && !PlatformUtils.isWeb) {
-      return RobotWorldHome();
-    }
-    if (index == 2) {
-      return RobotWorldSchool();
-    }
-    if (index == 3) {
-      return RobotCenter();
-    }
-    if (index == 1) {
-      return ChatPage();
-    }
-
-    return Container(
-      child: Center(
+    List tabbarItemsView = [
+      RobotWorldHome(),
+      ChatPage(),
+      RobotWorldSchool(),
+      RobotCenter(),
+      OwnerPage()
+    ];
+    if (index == 0 && PlatformUtils.isWeb) {
+      return Center(
         child: Text(titles[index]),
-      ),
-    );
+      );
+    }
+    return tabbarItemsView[index];
   }
 
   @override
