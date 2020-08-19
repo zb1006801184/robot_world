@@ -119,7 +119,7 @@ class _ContactPageState extends State<ContactPage> {
           Expanded(
               child: AzListView(
             data: _cityList,
-            topData: _hotCityList,
+            // topData: _hotCityList,
             itemBuilder: (context, model) => _buildListItem(model),
             suspensionWidget: _buildSusWidget(_suspensionTag),
             isUseRealIndex: true,
