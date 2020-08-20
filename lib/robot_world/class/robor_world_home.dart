@@ -93,8 +93,8 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
 
   //开始移动且移动结束之后对话
   _startMoveRobot() async {
-        _controller.clear();
-        _addAllRobotMark();
+        // _controller.clear();
+        // _addAllRobotMark();
     RobotModel model_A = dataList[chatRobotIndexA];
     RobotModel model_B = dataList[chatRobotIndexB];
     //添加平移
@@ -112,7 +112,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     Future.delayed(
       Duration(seconds: 10),
       () async {
-        _controller.clear(keepMyLocation: true);
+      await  _controller.clear(keepMyLocation: true);
         _addAllMark(chatRobotIndexB, true);
       },
     ).then((value) async {
@@ -123,7 +123,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
         showBoxA = !showBoxA;
         if (count >= dataList[chatRobotIndexA].questionVos.length ||
             count == 5) {
-          _controller.clearMarkers([markB]);
+           _controller.clearMarkers([markB]);
           _chatEndAndBack();
           return;
         }
@@ -162,8 +162,8 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     _timer.cancel();
     _timer = null;
     showBoxA = true;
-    _controller.clear();
-    _addAllMark(chatRobotIndexB, false);
+  await  _controller.clear().then((value) => _addAllMark(chatRobotIndexB, false));
+    
     _moveMarker = await _controller?.addSmoothMoveMarker(
       SmoothMoveMarkerOption(
         path: [
@@ -174,9 +174,10 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
         duration: Duration(seconds: 10),
       ),
     );
-    Future.delayed(Duration(seconds: 10), () {
-      _addAllRobotMark();
-      _changeChatRobot();
+    Future.delayed(Duration(seconds: 10), () async{
+      await _controller.clear();
+    await  _addAllRobotMark();
+    await  _changeChatRobot();
       _startMoveRobot();
       return "我该返回B机器人了";
     }).then((value) {
@@ -275,7 +276,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     Future.delayed(
       Duration(seconds: 10),
       () async {
-        _controller.clear(keepMyLocation: true);
+        await _controller.clear(keepMyLocation: true);
         Marker mark1 = await _controller.addMarker(_mark_option1);
         markers.add(mark1);
         Marker mark2 = await _controller.addMarker(_mark_option2);
@@ -289,7 +290,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
         showBoxA = !showBoxA;
         count++;
         if (count == 5) {
-          _controller.clearMarkers([markers[1]]);
+         await  _controller.clearMarkers([markers[1]]);
 
           _moveAToB(markr1);
 

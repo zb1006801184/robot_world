@@ -324,6 +324,7 @@ class _RobotCenterState extends State<RobotCenter> {
               ),
             ),
           ),
+          Expanded(child: 
           Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,11 +344,14 @@ class _RobotCenterState extends State<RobotCenter> {
                   margin: EdgeInsets.only(top: 5),
                   child: Text(
                     subTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xFFAEAFB7)),
                   ),
                 ),
               ],
             ),
+          ),
           ),
           _button(),
         ],
