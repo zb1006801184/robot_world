@@ -19,6 +19,9 @@ class NavBarBase extends StatelessWidget {
       return GestureDetector(
         child: Container(
           padding: EdgeInsets.only(left: 16),
+          //不添加装饰器空白部分无法响应点击
+          decoration: BoxDecoration(
+          ),
           width: 32,
           height: 32,
           child: Row(
