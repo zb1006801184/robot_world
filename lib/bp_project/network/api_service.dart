@@ -6,6 +6,9 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:robot_world/page_index.dart';
 import '../../model/robot_model.dart';
+import '../../model/mine_robot_model.dart';
+import '../../model/apply_robot_model.dart';
+import '../../model/user_model.dart';
 class ApiService {
 //登录
   static Future<LoginPerson> login(
@@ -45,9 +48,10 @@ class ApiService {
 
   //提交列表
   static Future<FormDataModel> subCommitAllFromData(Map params) async {
-    Response response = await HttpUtils(
-            headers: {"Authorization": "Bearer ${Global.profile.accessToken}","Content-type":"application/json"})
-        .request(ApiUrl.SAVE_FORM, method: HttpUtils.POST, data: params);
+    Response response = await HttpUtils(headers: {
+      "Authorization": "Bearer ${Global.profile.accessToken}",
+      "Content-type": "application/json"
+    }).request(ApiUrl.SAVE_FORM, method: HttpUtils.POST, data: params);
     if (response != null) {
       var responseData = jsonDecode(response.data);
       var mapData = responseData["data"];
@@ -61,8 +65,9 @@ class ApiService {
   }
 
   //机器人列表
-static Future<List<RobotModel>>getRobotListData(Map<String ,dynamic> params) async{
-  Response response = await HttpUtils(
+  static Future<List<RobotModel>> getRobotListData(
+      Map<String, dynamic> params) async {
+    Response response = await HttpUtils(
             // headers: {"Authorization": "Bearer ${Global.profile.accessToken}","Content-type":"application/json"}
             )
         .request(ApiUrl.ROBOT_LIST, method: HttpUtils.GET, data: params);
@@ -78,6 +83,69 @@ static Future<List<RobotModel>>getRobotListData(Map<String ,dynamic> params) asy
     } else {
       return null;
     }
-}
+  }
+
+//获取机器人信息
+  static Future<MineRobotModel> getMainRobotData() async {
+    Response response = await HttpUtils(headers: {
+      "Authorization": "Bearer ${Global.profile.accessToken}",
+      "Content-type": "application/json"
+    }).request(ApiUrl.MAIN_ROBOT_MESSAGE, method: HttpUtils.GET, data: null);
+
+    if (response != null) {
+      var responseData = jsonDecode(response.data);
+      MineRobotModel data = MineRobotModel.fromJson(responseData["data"]);
+      return data;
+    } else {
+      return null;
+    }
+  }
+
+  //获取我的应用机器人
+  static Future<MineApplyRobotModel> getMineRbotData() async {
+    Response response = await HttpUtils(headers: {
+      "Authorization": "Bearer ${Global.profile.accessToken}",
+      "Content-type": "application/json"
+    }).request(ApiUrl.MINE_ROBOT, method: HttpUtils.GET, data: null);
+    if (response != null) {
+      var responseData = jsonDecode(response.data);
+      MineApplyRobotModel data = MineApplyRobotModel.fromJson(responseData["data"]);
+      return data;
+    } else {
+      return null;
+    }
+  }
+
+  //获取我的特约机器人
+  static Future<MineApplyRobotModel> getSpecialRobot() async {
+    Response response = await HttpUtils(headers: {
+      "Authorization": "Bearer ${Global.profile.accessToken}",
+      "Content-type": "application/json"
+    }).request(ApiUrl.MINE_SPECIAL_ROBOT, method: HttpUtils.GET, data: null);
+
+    if (response != null) {
+      var responseData = jsonDecode(response.data);
+      MineApplyRobotModel data = MineApplyRobotModel.fromJson(responseData["data"]);
+      return data;
+    } else {
+      return null;
+    }
+  }
+
+  //获取用户信息
+  static Future<UserModel> getUserData() async {
+    Response response = await HttpUtils(headers: {
+      "Authorization": "Bearer ${Global.profile.accessToken}",
+      "Content-type": "application/json"
+    }).request(ApiUrl.MINE_MESSAGE, method: HttpUtils.GET, data: null);
+
+    if (response != null) {
+      var responseData = jsonDecode(response.data);
+      UserModel data = UserModel.fromJson(responseData["data"]);
+      return data;
+    } else {
+      return null;
+    }
+  }
 
 }

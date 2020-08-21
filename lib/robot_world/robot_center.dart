@@ -1,5 +1,7 @@
 import '../page_index.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import '../model/mine_robot_model.dart';
+import '../model/apply_robot_model.dart';
 
 class RobotCenter extends StatefulWidget {
   @override
@@ -7,30 +9,87 @@ class RobotCenter extends StatefulWidget {
 }
 
 class _RobotCenterState extends State<RobotCenter> {
+  //主机器人信息
+  MineRobotModel _mineRobotModel;
+  //应用机器人列表
+  MineApplyRobotModel _applyRobotList;
+  //特约机器人
+  MineApplyRobotModel _specialRobotModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestData();
+  }
+
+  _requestData() async {
+    //主机器人信息
+    ApiService.getMainRobotData().then((value) {
+      setState(() {
+        _mineRobotModel = value;
+      });
+    });
+    //我的应用机器人
+    ApiService.getMineRbotData().then((value) {
+      setState(() {
+        _applyRobotList = value;
+      });
+    });
+    //我的特约机器人
+    ApiService.getSpecialRobot().then((value) {
+      setState(() {
+        _specialRobotModel = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return 
-         Container(
-            color: Colors.white,
-            child: ListView(
-              children: [
-                _personMessage(context),
-                _buildIndicator(50),
-                _buildLevel(),
-                _buildMenuIcon(context),
-                _buildHeadTitle("我的应用机器人"),
-                _buildSpecialRobot(context, "", "解决者地图", "帮助有能力凭借自身能力完…"),
-                _buildLine(),
-                _buildSpecialRobot(context, "", "智慧商圈", "让您了解身边商圈的点点滴滴"),
-                _buildLine(),
-                _buildHeadTitle("特约机器人"),
-                _buildRobotItem(context, "", "养生知识机器人", "回答您关于养生的科普知识"),
-                _buildLine(),
-                _buildRobotItem(context, "", "高考报名机器人", "根据您所在省份、分数和打算报考的方向…"),
-                _buildLine(),
-                _buildRobotItem(context, "", "在线小说机器人", "根据您喜欢看的分类为您推送最新的火热小…"),
-              ],
-            ));
+    return Container(
+        color: Colors.white,
+        child: ListView(
+          children: [
+            _personMessage(context),
+            _buildIndicator(40),
+            _buildLevel(),
+            _buildMenuIcon(context),
+            _buildHeadTitle("我的应用机器人"),
+            Container(
+              child: Column(
+                children: _buildApplyList(),
+              ),
+            ),
+            _buildHeadTitle("特约机器人"),
+            Container(
+              child: Column(
+                children: _buildSpecialList(),
+              ),
+            ),
+          ],
+        ));
+  }
+
+  //创建我的应用机器人列表
+  List<Widget> _buildApplyList() {
+    List<Widget> result = [];
+    for (Records model in _applyRobotList.records) {
+      result.add(_buildSpecialRobot(
+          context, "", model.robotName, model.subTitle, model.identity));
+      result.add(_buildLine());
+    }
+    result.removeLast();
+    return result.toList();
+  }
+
+  //创建特约机器人列表
+  List<Widget> _buildSpecialList() {
+    List<Widget> result = [];
+    for (Records model in _applyRobotList.records) {
+      result.add(_buildRobotItem(context, "", model.robotName, model.subTitle));
+      result.add(_buildLine());
+    }
+        result.removeLast();
+    return result.toList();
   }
 
   //个人信息
@@ -57,14 +116,14 @@ class _RobotCenterState extends State<RobotCenter> {
                 Container(
                   margin: EdgeInsets.only(top: 17, left: 16),
                   child: Text(
-                    "优尼客Robot",
+                    _mineRobotModel.robotName,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 2, left: 16),
                   child: Text(
-                    "机器人ID:5201314",
+                    "机器人ID:${_mineRobotModel.id}",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                 ),
@@ -250,17 +309,18 @@ class _RobotCenterState extends State<RobotCenter> {
 
 //特约机器人/我的机器人
   Widget _buildSpecialRobot(
-      BuildContext context, String imageStr, String title, String subTitle) {
+      BuildContext context, String imageStr, String title, String subTitle,
+      [int id]) {
     //右侧按钮
     Widget _button() {
-      if (title == "解决者地图") {
+      if (id != null) {
         return Container(
           padding: EdgeInsets.only(left: 16, right: 16),
           child: Container(
             width: 81,
             height: 30,
             decoration: new BoxDecoration(
-              color: Color(0xFF5277FF),
+              color: Color(0xFF00BFD8),
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
             ),
             child: Center(
@@ -277,7 +337,7 @@ class _RobotCenterState extends State<RobotCenter> {
 
     //中间是否拥有的状态
     Widget _robotState() {
-      if (title == "解决者地图") {
+      if (id != null) {
         return Container(
           margin: EdgeInsets.only(left: 8),
           padding: EdgeInsets.only(left: 6, top: 3, bottom: 3, right: 3),
@@ -318,40 +378,44 @@ class _RobotCenterState extends State<RobotCenter> {
                 width: 44,
                 height: 44,
                 child: Image(
-                    image: AssetImage(title == "解决者地图"
+                    image: AssetImage(id == 3
                         ? "images/logo_icon.png"
                         : "images/logo_icon_t.png")),
               ),
             ),
           ),
-          Expanded(child: 
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    child: Row(
-                  children: [
-                    Text(
-                      title,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Expanded(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      _robotState(),
+                    ],
+                  )),
+                  Container(
+                    margin: EdgeInsets.only(top: 5),
+                    child: Text(
+                      subTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Color(0xFFAEAFB7)),
                     ),
-                    _robotState(),
-                  ],
-                )),
-                Container(
-                  margin: EdgeInsets.only(top: 5),
-                  child: Text(
-                    subTitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xFFAEAFB7)),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           ),
           _button(),
         ],

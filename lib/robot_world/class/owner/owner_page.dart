@@ -1,5 +1,6 @@
+import 'package:robot_world/model/user_model.dart';
+
 import '../../../page_index.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class OwnerPage extends StatefulWidget {
   @override
@@ -7,6 +8,21 @@ class OwnerPage extends StatefulWidget {
 }
 
 class _OwnerPageState extends State<OwnerPage> {
+  UserModel _userModel;
+  @override
+  void initState() {
+    super.initState();
+    _requestUserData();
+  }
+
+  _requestUserData() async {
+    ApiService.getUserData().then((value) {
+      setState(() {
+        _userModel = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,8 +33,8 @@ class _OwnerPageState extends State<OwnerPage> {
             _buildLine(),
             _buildMenuIcon(context),
             _buildLine(),
-            _buildItem("icon", "呼麦麦社区"),
-            _buildItem("icon", "设置"),
+            _buildItem("images/me_list_icon_community.png", "呼麦麦社区"),
+            _buildItem("images/me_list_icon_settings.png", "设置"),
           ],
         ));
   }
@@ -46,23 +62,16 @@ class _OwnerPageState extends State<OwnerPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 17, left: 16),
+                  margin: EdgeInsets.only(top: 28, left: 16),
                   child: Text(
-                    "优尼客Robot",
+                    _userModel.username,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 2, left: 16),
                   child: Text(
-                    "机器人ID:5201314",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 2, left: 16),
-                  child: Text(
-                    "知识量：450000",
+                    "机器人ID:${_userModel.robotId}",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                 ),
@@ -105,9 +114,9 @@ class _OwnerPageState extends State<OwnerPage> {
   Widget _buildMenuIcon(BuildContext context) {
     List titles = ["订单", "钱包", "会员"];
     List images = [
-      "images/rbtcenter_icon_community.png",
-      "images/rbtcenter_icon_send.png",
-      "images/rbtcenter_icon_train.png"
+      "images/me_icon_order.png",
+      "images/me_icon_money.png",
+      "images/me_icon_vip.png"
     ];
 
     return Container(
@@ -152,7 +161,7 @@ class _OwnerPageState extends State<OwnerPage> {
                   margin: EdgeInsets.only(left: 21),
                   height: 24,
                   width: 24,
-                  color: Colors.red,
+                  child: Image(image: AssetImage(icon)),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 16),

@@ -12,7 +12,7 @@ void main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
   Global.init().then((e) {
-    debugPaintSizeEnabled = true; //调试模式
+    debugPaintSizeEnabled = false; //调试模式
     if (Global.loginState == null || Global.loginState == false) {
       runApp(Login());
     } else {
