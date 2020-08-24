@@ -1,7 +1,7 @@
-import '../page_index.dart';
+import '../../../page_index.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-import '../model/mine_robot_model.dart';
-import '../model/apply_robot_model.dart';
+import '../../../model/mine_robot_model.dart';
+import '../../../model/apply_robot_model.dart';
 
 class RobotCenter extends StatefulWidget {
   @override

@@ -36,6 +36,7 @@ class _OwnerPageState extends State<OwnerPage> {
             _buildMenuIcon(context),
             _buildLine(),
             _buildItem("images/me_list_icon_community.png", "呼麦麦社区"),
+            _buildLineMix(),
             _buildItem("images/me_list_icon_settings.png", "设置"),
           ],
         ));
@@ -43,7 +44,8 @@ class _OwnerPageState extends State<OwnerPage> {
 
   //个人信息
   Widget _personMessage(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      child: Container(
       color: Colors.white,
       height: 104,
       width: Global.ksWidth,
@@ -90,6 +92,10 @@ class _OwnerPageState extends State<OwnerPage> {
           )
         ],
       ),
+    ),
+    onTap: (){
+      Navigator.of(context).pushNamed("/OwnerMessagePage");
+    },
     );
   }
 
@@ -125,7 +131,6 @@ class _OwnerPageState extends State<OwnerPage> {
       height: 117,
       color: Colors.white,
       width: Global.ksWidth,
-      margin: EdgeInsets.only(top: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -137,12 +142,20 @@ class _OwnerPageState extends State<OwnerPage> {
     );
   }
 
-//间隔线
+//间隔
   Widget _buildLine() {
     return Container(
       height: 10,
       color: Color(0xFFF4F5F7),
       margin: EdgeInsets.only(left: 0, right: 0),
+    );
+  }
+//间隔线
+  Widget _buildLineMix(){
+    return Container(
+      height: 1,
+      color: Color(0xFFF4F4F4),
+      margin: EdgeInsets.only(left: 61, right: 16),
     );
   }
 

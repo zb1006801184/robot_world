@@ -38,7 +38,7 @@ import 'demo/refresh_demo.dart';
 import 'demo/expansionTile_demo.dart';
 import 'demo/map_demo.dart';
 import 'package:robot_world/robot_world/class/world/robor_world_home.dart';
-import 'robot_world/robot_center.dart';
+import 'robot_world/class/nest/robot_center.dart';
 import 'robot_world/class/main_route.dart';
 import 'robot_world/class/school/robot_message.dart';
 import 'robot_world/class/contacts/contacts_page.dart';
@@ -81,11 +81,11 @@ final routes = {
   '/ExpansionTileDemo': (context, {arguments}) => ExpansionTileDemo(),
   '/MapDemo': (context, {arguments}) => MapDemo(),
   '/RobotWorldHome': (context, {arguments}) => RobotWorldHome(),
-  '/MainRoute': (context, {arguments}) => ScaffoldRoute(),
-  '/RobotCenter': (context, {arguments}) => RobotCenter(),
-  '/RobotMessage': (context, {arguments}) => RobotMessage(),
-    '/ContactPage': (context, {arguments}) => ContactPage(),
-    '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(),
+  '/MainRoute': (context, {arguments}) => ScaffoldRoute(),//Tabbar
+  '/RobotCenter': (context, {arguments}) => RobotCenter(),//R小窝
+  '/RobotMessage': (context, {arguments}) => RobotMessage(),//机器人简介
+    '/ContactPage': (context, {arguments}) => ContactPage(),//R社交
+    '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(), //编辑资料
 
 };
 

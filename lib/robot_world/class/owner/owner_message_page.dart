@@ -8,10 +8,8 @@ class OwnerMessagePage extends StatefulWidget {
 class _OwnerMessagePageState extends State<OwnerMessagePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("编辑资料"),
-      ),
+    return Scaffold(
+      appBar: NavBarBase().configAppBarRobot("编辑资料", context),
     );
   }
 }
