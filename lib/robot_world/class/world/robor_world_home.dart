@@ -3,8 +3,8 @@ import 'package:robot_world/page_index.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:math';
-import '../../model/robot_model.dart';
-
+import '../../../page_index.dart';
+import 'package:robot_world/model/robot_model.dart';
 class NextLatLng {
   final random = Random();
 

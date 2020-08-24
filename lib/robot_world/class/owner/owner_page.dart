@@ -20,6 +20,8 @@ class _OwnerPageState extends State<OwnerPage> {
       setState(() {
         _userModel = value;
       });
+    }).catchError((e){
+
     });
   }
 
@@ -64,14 +66,14 @@ class _OwnerPageState extends State<OwnerPage> {
                 Container(
                   margin: EdgeInsets.only(top: 28, left: 16),
                   child: Text(
-                    _userModel.username,
+                    _userModel==null?"zzz":_userModel.username,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 2, left: 16),
                   child: Text(
-                    "机器人ID:${_userModel.robotId}",
+                    "机器人ID:${_userModel==null?"z123":_userModel.robotId}",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                 ),

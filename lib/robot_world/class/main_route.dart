@@ -1,5 +1,5 @@
 import 'package:robot_world/page_index.dart';
-import 'package:robot_world/robot_world/class/robor_world_home.dart';
+import 'package:robot_world/robot_world/class/world/robor_world_home.dart';
 import 'school/robot_world_school.dart';
 import '../robot_center.dart';
 import 'contacts/chat_page.dart';

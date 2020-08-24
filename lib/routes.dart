@@ -37,11 +37,12 @@ import 'bp_project/class/outlook_result_page.dart';
 import 'demo/refresh_demo.dart';
 import 'demo/expansionTile_demo.dart';
 import 'demo/map_demo.dart';
-import 'package:robot_world/robot_world/class/robor_world_home.dart';
+import 'package:robot_world/robot_world/class/world/robor_world_home.dart';
 import 'robot_world/robot_center.dart';
 import 'robot_world/class/main_route.dart';
 import 'robot_world/class/school/robot_message.dart';
 import 'robot_world/class/contacts/contacts_page.dart';
+import 'robot_world/class/owner/owner_message_page.dart';
 final routes = {
   // '/': (context,{arguments}) => Home(),
   '/dis': (context, {arguments}) => Dis(),
@@ -84,6 +85,7 @@ final routes = {
   '/RobotCenter': (context, {arguments}) => RobotCenter(),
   '/RobotMessage': (context, {arguments}) => RobotMessage(),
     '/ContactPage': (context, {arguments}) => ContactPage(),
+    '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(),
 
 };
 

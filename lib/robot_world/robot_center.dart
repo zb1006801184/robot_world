@@ -72,23 +72,27 @@ class _RobotCenterState extends State<RobotCenter> {
   //创建我的应用机器人列表
   List<Widget> _buildApplyList() {
     List<Widget> result = [];
-    for (Records model in _applyRobotList.records) {
+    for (Records model in _applyRobotList?.records ?? []) {
       result.add(_buildSpecialRobot(
-          context, "", model.robotName, model.subTitle, model.identity));
+          context, "", model?.robotName, model?.subTitle, model?.identity));
       result.add(_buildLine());
     }
-    result.removeLast();
+    if (result.length > 1) {
+      result.removeLast();
+    }
     return result.toList();
   }
 
   //创建特约机器人列表
   List<Widget> _buildSpecialList() {
     List<Widget> result = [];
-    for (Records model in _applyRobotList.records) {
+    for (Records model in _applyRobotList?.records ?? []) {
       result.add(_buildRobotItem(context, "", model.robotName, model.subTitle));
       result.add(_buildLine());
     }
-        result.removeLast();
+    if (result.length > 1) {
+      result.removeLast();
+    }
     return result.toList();
   }
 
@@ -116,14 +120,14 @@ class _RobotCenterState extends State<RobotCenter> {
                 Container(
                   margin: EdgeInsets.only(top: 17, left: 16),
                   child: Text(
-                    _mineRobotModel.robotName,
+                    _mineRobotModel?.robotName ?? "unknown",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 2, left: 16),
                   child: Text(
-                    "机器人ID:${_mineRobotModel.id}",
+                    "机器人ID:${_mineRobotModel?.id ?? "unknown"}",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                 ),
