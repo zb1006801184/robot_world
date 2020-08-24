@@ -59,11 +59,11 @@ class HttpUtils {
       ..add(InterceptorsWrapper(
         /// 请求时的处理
         onRequest: (RequestOptions options) {
-          debugPrint("\n================== 请求数据 ==========================");
-          debugPrint("url = ${options.uri.toString()}");
-          debugPrint("data = ${options.data}");
-          debugPrint("queryParameters = ${options.queryParameters}");
-          debugPrint("method = ${options.method}");
+          // debugPrint("\n================== 请求数据 ==========================");
+          // debugPrint("url = ${options.uri.toString()}");
+          // debugPrint("data = ${options.data}");
+          // debugPrint("queryParameters = ${options.queryParameters}");
+          // debugPrint("method = ${options.method}");
 
           options.headers
             ..addAll({
@@ -76,19 +76,19 @@ class HttpUtils {
 
         /// 响应时的处理
         onResponse: (Response response) {
-          debugPrint("\n================== 响应数据 ==========================");
-          debugPrint("code = ${response.statusCode}");
-          debugPrint("data = ${response.data}");
-          debugPrint("\n");
+          // debugPrint("\n================== 响应数据 ==========================");
+          // debugPrint("code = ${response.statusCode}");
+          // debugPrint("data = ${response.data}");
+          // debugPrint("\n");
         },
         onError: (DioError e) {
-          debugPrint("\n================== 错误响应数据 ======================");
-          debugPrint("type = ${e.type}");
-          debugPrint("error = ${e.error}");
-          debugPrint("message = ${e.message}");
-          debugPrint('请求发生错误：${e.response}');
+          // debugPrint("\n================== 错误响应数据 ======================");
+          // debugPrint("type = ${e.type}");
+          // debugPrint("error = ${e.error}");
+          // debugPrint("message = ${e.message}");
+          // debugPrint('请求发生错误：${e.response}');
 
-          debugPrint("\n");
+          // debugPrint("\n");
         },
       ))
 

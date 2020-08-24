@@ -43,7 +43,7 @@ class NavBarBase extends StatelessWidget {
     return AppBar(
       title: Text(
         title,
-        style: TextStyle(color: Colors.black, fontSize: 16),
+        style: TextStyle(color: Colors.black, fontSize: 17,fontWeight: FontWeight.w600),
       ),
       leading: _buildLeadingWidget(),
       backgroundColor: Colors.white,
