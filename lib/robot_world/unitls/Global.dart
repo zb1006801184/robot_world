@@ -15,6 +15,8 @@ class Global {
   static const BGCOLOR = Color(0xFFf4f5f7);
   //按钮背景色
   static const BUTTONBGCOLOR = Color(0xFF1F3ABB);
+  //主体风格颜色
+  static const MAINSTYLECOLOR = Color(0xFF00BFD8);
 
   static SharedPreferences _prefs;
   static LoginPerson profile = LoginPerson();

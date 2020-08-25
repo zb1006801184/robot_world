@@ -126,7 +126,7 @@ class LoginPageView extends StatelessWidget {
               height: 48,
               color: const Color(0xFFF4F5F7),
               child: FlatButton(
-                color: Color(0xFF1F3ABB),
+                color: Global.MAINSTYLECOLOR,
                 highlightColor: Colors.blue[700],
                 colorBrightness: Brightness.dark,
                 splashColor: Colors.grey,

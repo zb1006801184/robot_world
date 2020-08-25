@@ -162,7 +162,8 @@ class _OwnerPageState extends State<OwnerPage> {
   //item
 
   Widget _buildItem(String icon, String title) {
-    return Container(
+    return GestureDetector(
+      child: Container(
       color: Colors.white,
       height: 48,
       width: Global.ksWidth,
@@ -198,6 +199,10 @@ class _OwnerPageState extends State<OwnerPage> {
           ),
         ],
       ),
+    ),
+    onTap: (){
+      Navigator.of(NavKey.navKey.currentContext).pushNamed("/OwnerSetPage");
+    },
     );
   }
 }

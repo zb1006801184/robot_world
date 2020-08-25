@@ -82,6 +82,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: onGenerateRoute,
       routes: routes,
       debugShowCheckedModeBanner: true, //debug标识
+      navigatorKey: NavKey.navKey,
     );
   }
 }
