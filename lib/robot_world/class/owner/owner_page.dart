@@ -201,7 +201,7 @@ class _OwnerPageState extends State<OwnerPage> {
       ),
     ),
     onTap: (){
-      Navigator.of(NavKey.navKey.currentContext).pushNamed("/OwnerSetPage");
+      Navigator.of(context).pushNamed("/OwnerSetPage");
     },
     );
   }

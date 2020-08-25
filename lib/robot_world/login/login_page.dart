@@ -12,6 +12,7 @@ class LoginPageView extends StatelessWidget {
       prefs.setBool(DataName.LOGINSTATE, true);
       String data = jsonEncode(response.toJson());
       prefs.setString(DataName.PERSONINFO, data);
+      Global.loginState = true;
       Global.profile = response;
       Navigator.pushNamed(context, "/MainRoute");
     }
@@ -34,10 +35,8 @@ class LoginPageView extends StatelessWidget {
               height: Global.ksToolbarHeight + Global.ksStateHeight,
               child: IconButton(
                 icon: Image.asset('images/nav_icon_close.png'),
-                // padding: EdgeInsets.all(3),
-                // iconSize: 20,
                 onPressed: () {
-                  print("点击了关闭");
+                  Navigator.of(context).pop();
                 },
               ),
             ),

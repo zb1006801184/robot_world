@@ -9,31 +9,22 @@ import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 
 // import 'package:flutter_i18n/flutter_i18n.dart';
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   Global.init().then((e) {
     debugPaintSizeEnabled = false; //调试模式
-    if (Global.loginState == null || Global.loginState == false) {
-      runApp(Login());
-    } else {
-      runApp(MyApp());
-    }
-    // runApp(TestDemo());
+    runApp(MyApp());
+    // runApp(TestDemo()); //国际化  
     SystemUiOverlayStyle style = SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light
-    );
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light);
     SystemChrome.setSystemUIOverlayStyle(style);
   });
   await AmapService.init(
     iosKey: 'cbe00823663a07e543d2d54430432272',
     androidKey: 'c91e45151b799ec4bd6f73508e7d28ea',
-    // webApiKey: 'e69c6fddf6ccf8de917f5990deaa9aa2',
   );
   await AmapCore.init('cbe00823663a07e543d2d54430432272');
-    await enableFluttifyLog(false);
-
-
+  await enableFluttifyLog(false);
 }
 
 class TestDemo extends StatefulWidget {
@@ -83,19 +74,6 @@ class MyApp extends StatelessWidget {
       routes: routes,
       debugShowCheckedModeBanner: true, //debug标识
       navigatorKey: NavKey.navKey,
-    );
-  }
-}
-
-class Login extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Navigation',
-      initialRoute: '/Login',
-      routes: routes,
-      onGenerateRoute: onGenerateRoute,
-      debugShowCheckedModeBanner: true,
     );
   }
 }

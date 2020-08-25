@@ -132,7 +132,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markB = await _controller.addMarker(MarkerOption(
               latLng: LatLng(
                   double.parse(model_A.lat), double.parse(model_A.lng) + 0.001),
-              title: model_A.questionVos[count].question,
+              title: Global.loginState == true? model_A.questionVos[count].question:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
 
@@ -143,7 +143,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markA = await _controller.addMarker(MarkerOption(
               latLng:
                   LatLng(double.parse(model_A.lat), double.parse(model_A.lng)),
-              title: model_A.questionVos[count].answers[0].answer,
+              title: Global.loginState == true? model_A.questionVos[count].answers[0].answer:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
           markA.showInfoWindow();

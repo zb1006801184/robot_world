@@ -1,4 +1,7 @@
+import 'package:robot_world/main.dart';
+
 import '../../../page_index.dart';
+import '../../login/login_page.dart';
 
 class OwnerSetPage extends StatefulWidget {
   @override
@@ -40,8 +43,15 @@ class _OwnerSetPageState extends State<OwnerSetPage> {
         onTap: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setBool(DataName.LOGINSTATE, false);
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              "/Login", ModalRoute.withName("/Login"));
+          Global.loginState = false;
+          // Navigator.of(context).pushNamedAndRemoveUntil(
+          //     "/Login", ModalRoute.withName("/Login"));
+
+          Navigator.of(context).push(PageRouteBuilder(
+              opaque: false,
+              pageBuilder: (BuildContext context, Animation animation,
+                      Animation secondaryAnimation) =>
+                  FadeTransition(opacity: animation, child: LoginPageView())));
         },
       ),
     );
