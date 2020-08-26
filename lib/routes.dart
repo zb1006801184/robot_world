@@ -41,7 +41,7 @@ import 'robot_world/class/school/robot_message.dart';
 import 'robot_world/class/contacts/contacts_page.dart';
 import 'robot_world/class/owner/owner_message_page.dart';
 import 'robot_world/class/owner/owner_set.page.dart';
-
+import 'robot_world/class/contacts/business_card_page.dart';
 final routes = {
   // '/': (context,{arguments}) => Home(),
   '/dis': (context, {arguments}) => Dis(),
@@ -86,6 +86,8 @@ final routes = {
   '/ContactPage': (context, {arguments}) => ContactPage(), //R社交
   '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(), //编辑资料
   '/OwnerSetPage': (context, {arguments}) => OwnerSetPage(), //设置
+    '/BusinessCardPage': (context, {arguments}) => BusinessCardPage(), //名片
+
 };
 
 var onGenerateRoute = (RouteSettings settings) {
