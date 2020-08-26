@@ -45,7 +45,8 @@ class _BusinessCardDetailPageState extends State<BusinessCardDetailPage> {
       color: Color(0xFFF6F6F6),
       child: Column(
         children: [
-          Container(
+          InkWell(
+            child: Container(
             width: Global.ksWidth,
             padding: EdgeInsets.only(top: 12, bottom: 12),
             child: Center(
@@ -55,6 +56,10 @@ class _BusinessCardDetailPageState extends State<BusinessCardDetailPage> {
                 width: 30,
               ),
             ),
+          ),
+          onTap: (){
+            Navigator.pop(context);
+          },
           ),
           Container(
             height: 1,
@@ -89,16 +94,25 @@ class _BusinessCardDetailPageState extends State<BusinessCardDetailPage> {
           decoration: BoxDecoration(
               color: index == 0 ? Global.MAINSTYLECOLOR : Colors.white,
               borderRadius: BorderRadius.circular(4)),
-          child: Center(
-            child: Text(
-              dataList[index],
-              style: TextStyle(
-                  fontSize: 16,
-                  color: index == 0 ? Colors.white : Colors.black),
-            ),
+          child: Text(
+            dataList[index],
+            style: TextStyle(
+                fontSize: 16, color: _getTextColor(index)),
           ),
         )
       ],
     );
   }
+
+  Color _getTextColor(int index){
+    if (index == 0) {
+      return Colors.white;
+    }
+    if (index == 1) {
+      return Colors.black;
+    }
+    return Global.MAINSTYLECOLOR;
+  }
+
+
 }
