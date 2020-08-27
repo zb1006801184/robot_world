@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:robot_world/robot_world/unitls/sp_util.dart';
 import 'routes.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
@@ -10,6 +11,7 @@ import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 // import 'package:flutter_i18n/flutter_i18n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SpUtil.getInstance();
   Global.init().then((e) {
     debugPaintSizeEnabled = false; //调试模式
     runApp(Store.init(child: MyApp()));

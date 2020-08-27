@@ -1,5 +1,7 @@
+import 'package:robot_world/model/user_model.dart';
 import 'package:robot_world/page_index.dart';
 import 'package:robot_world/robot_world/class/world/robor_world_home.dart';
+import 'package:robot_world/robot_world/store/user_state_model.dart';
 import 'school/robot_world_school.dart';
 import '../class/nest/robot_center.dart';
 import 'contacts/chat_page.dart';
@@ -17,7 +19,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   List titles = ["R世界", "R社交", "R学校", "R小窝", "R主人"];
 
   Widget itemViewC(int index) {
-    if (Global.loginState != true && index != 0) {
+    if (Store.value<UserStateModel>(context).isLogin() != true && index != 0) {
       return Center(
         child: Text(titles[index]),
       );
