@@ -2,7 +2,7 @@ import 'dart:convert';
 import '../unitls/sp_util.dart';
 import 'package:robot_world/page_index.dart';
 class UserStateModel extends ChangeNotifier {
-  //    notifyListeners(); 刷新ui
+  //   调用 notifyListeners(); 依赖的widget自动刷新
   //是否登录
   bool isLogin() {
     bool isLogin = SpUtil.getBool(DataName.LOGINSTATE, defValue: false);
