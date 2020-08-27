@@ -1,4 +1,5 @@
 import 'package:robot_world/main.dart';
+import 'package:robot_world/robot_world/unitls/sp_util.dart';
 
 import '../../../page_index.dart';
 import '../../login/login_page.dart';
@@ -41,12 +42,7 @@ class _OwnerSetPageState extends State<OwnerSetPage> {
           ],
         ),
         onTap: () async {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setBool(DataName.LOGINSTATE, false);
-          Global.loginState = false;
-          // Navigator.of(context).pushNamedAndRemoveUntil(
-          //     "/Login", ModalRoute.withName("/Login"));
-
+          SpUtil.setBool(DataName.LOGINSTATE, false);
           Navigator.of(context).push(PageRouteBuilder(
               opaque: false,
               pageBuilder: (BuildContext context, Animation animation,

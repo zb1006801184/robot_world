@@ -2,6 +2,7 @@ import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:robot_world/page_index.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:robot_world/robot_world/store/user_state_model.dart';
 import 'dart:math';
 import '../../../page_index.dart';
 import 'package:robot_world/model/robot_model.dart';
@@ -112,7 +113,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markB = await _controller.addMarker(MarkerOption(
               latLng: LatLng(
                   double.parse(model_A.lat), double.parse(model_A.lng) + 0.001),
-              title: Global.loginState == true? model_A.questionVos[count].question:"...",
+              title: Store.value<UserStateModel>(context,listen: false).isLogin() == true? model_A.questionVos[count].question:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
 
@@ -123,7 +124,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markA = await _controller.addMarker(MarkerOption(
               latLng:
                   LatLng(double.parse(model_A.lat), double.parse(model_A.lng)),
-              title: Global.loginState == true? model_A.questionVos[count].answers[0].answer:"...",
+              title: Store.value<UserStateModel>(context,listen: false).isLogin() == true? model_A.questionVos[count].answers[0].answer:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
           markA.showInfoWindow();

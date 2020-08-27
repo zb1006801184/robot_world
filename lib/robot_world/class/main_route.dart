@@ -120,7 +120,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute> {
   }
 
   void _onItemTapped(int index) {
-    if (Global.loginState == true || index == 0) {
+    if (Store.value<UserStateModel>(context,listen: false).isLogin() == true || index == 0) {
       setState(() {
         _selectedIndex = index;
         title = titles[index];

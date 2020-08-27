@@ -11,6 +11,7 @@ class UserStateModel extends ChangeNotifier {
 
   //保存登录信息
   void savaUserInfo()async {
+    //    notifyListeners(); 刷新ui
 
   }
 
