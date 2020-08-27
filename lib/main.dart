@@ -12,8 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Global.init().then((e) {
     debugPaintSizeEnabled = false; //调试模式
-    runApp(MyApp());
-    // runApp(TestDemo()); //国际化  
+    runApp(Store.init(child: MyApp()));
+    // runApp(TestDemo()); //国际化
     SystemUiOverlayStyle style = SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.light);

@@ -22,8 +22,6 @@ class Global {
   static LoginPerson profile = LoginPerson();
   static FormDataModel fromModel = FormDataModel();
 
-  // 网络缓存对象
-  // static NetCache netCache = NetCache();
 
   // 可选的主题列表
   static List<MaterialColor> get themes => _themes;
@@ -50,19 +48,6 @@ class Global {
     }
   }
 
-  // 如果没有缓存策略，设置默认缓存策略
-  //   profile.cache = profile.cache ?? CacheConfig()
-  //     ..enable = true
-  //     ..maxAge = 3600
-  //     ..maxCount = 100;
-
-  //   //初始化网络请求相关配置
-  //   Git.init();
-  // }
-
-  // 持久化Profile信息
-  // static saveProfile() =>
-  //     _prefs.setString("profile", jsonEncode(profile.toJson()));
 //设备宽高
   static double ksWidth = _width;
   static double ksHeight = _height;
