@@ -2,6 +2,8 @@ import 'package:robot_world/page_index.dart';
 import 'dart:ui';
 import 'dart:convert';
 
+import 'package:robot_world/robot_world/unitls/sp_util.dart';
+
 const _themes = <MaterialColor>[
   Colors.blue,
   Colors.cyan,
@@ -31,14 +33,13 @@ class Global {
   static bool loginState;
   //初始化全局信息，会在APP启动时执行
   static Future init() async {
-    _prefs = await SharedPreferences.getInstance();
-    loginState = _prefs.getBool(DataName.LOGINSTATE);
-    if (loginState != null && loginState == true) {
+    loginState = SpUtil.getBool(DataName.LOGINSTATE);
+    if (loginState == true) {
       print("已登录");
     } else {
       print("未登录");
     }
-    var _profile = _prefs.getString(DataName.PERSONINFO);
+    var _profile = SpUtil.getString(DataName.PERSONINFO);
     if (_profile != null) {
       try {
         profile = LoginPerson.fromJson(jsonDecode(_profile));

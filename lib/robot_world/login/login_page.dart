@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:robot_world/page_index.dart';
+import 'package:robot_world/robot_world/store/user_state_model.dart';
 import 'dart:ui';
 
 import 'package:robot_world/robot_world/unitls/sp_util.dart';
@@ -10,12 +11,7 @@ class LoginPageView extends StatelessWidget {
   _getLogin(context) async {
     LoginPerson response = await ApiService.login("15070925726", "1234");
     if (response != null) {
-      String data = jsonEncode(response.toJson());
-      //保存登录状态
-      SpUtil.setBool(DataName.LOGINSTATE, true);
-      //保存登录信息
-      SpUtil.setString(DataName.PERSONINFO, data);
-      Global.profile = response;
+      Store.value<UserStateModel>(context,listen: false).savaUserInfo(response);
       Navigator.pushNamed(context, "/MainRoute");
     }
   }
