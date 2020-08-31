@@ -41,7 +41,7 @@ void main() async {
   // 自定义报错页面
   ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) {
     debugPrint(flutterErrorDetails.toString());
-    return new Center(child: new Text("App错误，快去看看报错信息吧!"));
+    return new Center(child: new Text("出错了，快去看看报错信息吧！"));
   };
 
 }
