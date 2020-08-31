@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:robot_world/robot_world/class/main_route.dart';
 import 'demo/list_view.dart';
-import 'demo/list_view.dart';
 import 'page/dis.dart';
-import 'page/home.dart';
 import 'page/test.dart';
-import 'demo/list_view.dart';
 import 'demo/text_demo.dart';
 import 'demo/layout_view.dart';
 import 'bp_project/person_page.dart';
 import 'demo/network_demo.dart';
-import 'bp_project/login/login_page.dart';
+import 'robot_world/login/login_page.dart';
 import 'bp_project/class/title_page.dart';
 import 'bp_project/class/title_page_result.dart';
 import 'bp_project/class/plain_des_page.dart';
@@ -43,6 +40,8 @@ import 'robot_world/class/main_route.dart';
 import 'robot_world/class/school/robot_message.dart';
 import 'robot_world/class/contacts/contacts_page.dart';
 import 'robot_world/class/owner/owner_message_page.dart';
+import 'robot_world/class/owner/owner_set.page.dart';
+import 'robot_world/class/contacts/business_card_page.dart';
 final routes = {
   // '/': (context,{arguments}) => Home(),
   '/dis': (context, {arguments}) => Dis(),
@@ -81,11 +80,13 @@ final routes = {
   '/ExpansionTileDemo': (context, {arguments}) => ExpansionTileDemo(),
   '/MapDemo': (context, {arguments}) => MapDemo(),
   '/RobotWorldHome': (context, {arguments}) => RobotWorldHome(),
-  '/MainRoute': (context, {arguments}) => ScaffoldRoute(),//Tabbar
-  '/RobotCenter': (context, {arguments}) => RobotCenter(),//R小窝
-  '/RobotMessage': (context, {arguments}) => RobotMessage(),//机器人简介
-    '/ContactPage': (context, {arguments}) => ContactPage(),//R社交
-    '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(), //编辑资料
+  '/MainRoute': (context, {arguments}) => ScaffoldRoute(), //Tabbar
+  '/RobotCenter': (context, {arguments}) => RobotCenter(), //R小窝
+  '/RobotMessage': (context, {arguments}) => RobotMessage(), //机器人简介
+  '/ContactPage': (context, {arguments}) => ContactPage(), //R社交
+  '/OwnerMessagePage': (context, {arguments}) => OwnerMessagePage(), //编辑资料
+  '/OwnerSetPage': (context, {arguments}) => OwnerSetPage(), //设置
+    '/BusinessCardPage': (context, {arguments}) => BusinessCardPage(), //名片
 
 };
 

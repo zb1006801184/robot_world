@@ -20,9 +20,7 @@ class _OwnerPageState extends State<OwnerPage> {
       setState(() {
         _userModel = value;
       });
-    }).catchError((e){
-
-    });
+    }).catchError((e) {});
   }
 
   @override
@@ -46,56 +44,58 @@ class _OwnerPageState extends State<OwnerPage> {
   Widget _personMessage(BuildContext context) {
     return GestureDetector(
       child: Container(
-      color: Colors.white,
-      height: 104,
-      width: Global.ksWidth,
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 17),
-            height: 70,
-            width: 70,
-            child: Image(
-              image: AssetImage("images/nav_icon_me.png"),
-              fit: BoxFit.fill,
+        color: Colors.white,
+        height: 104,
+        width: Global.ksWidth,
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 17),
+              height: 70,
+              width: 70,
+              child: Image(
+                image: AssetImage("images/nav_icon_me.png"),
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Expanded(
-              child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 28, left: 16),
-                  child: Text(
-                    _userModel==null?"zzz":_userModel.username,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Expanded(
+                child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 28, left: 16),
+                    child: Text(
+                      _userModel == null ? "zzz" : _userModel.username,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 2, left: 16),
-                  child: Text(
-                    "机器人ID:${_userModel==null?"z123":_userModel.robotId}",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  Container(
+                    margin: EdgeInsets.only(top: 2, left: 16),
+                    child: Text(
+                      "机器人ID:${_userModel == null ? "z123" : _userModel.robotId}",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )),
-          Container(
-            margin: EdgeInsets.only(right: 16),
-            child: Image(
-              image: AssetImage("images/list_icon_goto_gray.png"),
-              width: 8,
-              height: 14,
-            ),
-          )
-        ],
+                ],
+              ),
+            )),
+            Container(
+              margin: EdgeInsets.only(right: 16),
+              child: Image(
+                image: AssetImage("images/list_icon_goto_gray.png"),
+                width: 8,
+                height: 14,
+              ),
+            )
+          ],
+        ),
       ),
-    ),
-    onTap: (){
-      Navigator.of(context).pushNamed("/OwnerMessagePage");
-    },
+      onTap: () {
+        Navigator.of(context).pushNamed("/OwnerMessagePage");
+      },
     );
   }
 
@@ -150,8 +150,9 @@ class _OwnerPageState extends State<OwnerPage> {
       margin: EdgeInsets.only(left: 0, right: 0),
     );
   }
+
 //间隔线
-  Widget _buildLineMix(){
+  Widget _buildLineMix() {
     return Container(
       height: 1,
       color: Color(0xFFF4F4F4),
@@ -162,42 +163,50 @@ class _OwnerPageState extends State<OwnerPage> {
   //item
 
   Widget _buildItem(String icon, String title) {
-    return Container(
-      color: Colors.white,
-      height: 48,
-      width: Global.ksWidth,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            child: Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 21),
-                  height: 24,
-                  width: 24,
-                  child: Image(image: AssetImage(icon)),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 16),
-                  child: Text(
-                    title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+    return GestureDetector(
+      child: Container(
+        color: Colors.white,
+        height: 48,
+        width: Global.ksWidth,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 21),
+                    height: 24,
+                    width: 24,
+                    child: Image(image: AssetImage(icon)),
                   ),
-                ),
-              ],
+                  Container(
+                    margin: EdgeInsets.only(left: 16),
+                    child: Text(
+                      title,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 17),
-            child: Image(
-              image: AssetImage("images/list_icon_goto_gray.png"),
-              width: 8,
-              height: 14,
+            Container(
+              margin: EdgeInsets.only(right: 17),
+              child: Image(
+                image: AssetImage("images/list_icon_goto_gray.png"),
+                width: 8,
+                height: 14,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () {
+        if (title == "设置") {
+          Navigator.of(context).pushNamed("/OwnerSetPage");
+        }
+      },
     );
   }
 }

@@ -1,32 +1,11 @@
-import 'package:dio/dio.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 import 'package:robot_world/page_index.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:robot_world/robot_world/store/user_state_model.dart';
 import 'dart:math';
 import '../../../page_index.dart';
 import 'package:robot_world/model/robot_model.dart';
-class NextLatLng {
-  final random = Random();
-
-  LatLng getNextLatLng({LatLng center}) {
-    center ??= LatLng(39.90960, 116.397228);
-    return LatLng(
-      center.latitude + random.nextDouble(),
-      center.longitude + random.nextDouble(),
-    );
-  }
-
-  List<LatLng> getNextBatchLatLng(int count) {
-    return [
-      for (int i = 0; i < count; i++)
-        LatLng(
-          39.90960 + random.nextDouble() * 4,
-          116.397228 + random.nextDouble() * 4,
-        )
-    ];
-  }
-}
-
 class RobotWorldHome extends StatefulWidget {
   @override
   _RobotWorldHomeState createState() => _RobotWorldHomeState();
@@ -35,10 +14,7 @@ class RobotWorldHome extends StatefulWidget {
 class _RobotWorldHomeState extends State<RobotWorldHome>
     with SingleTickerProviderStateMixin {
   @override
-  //动画
-  Animation<double> animation;
-  AnimationController animationController;
-  //
+
   AmapController _controller;
   //机器人B到达的位置
   LatLng lat = LatLng(39.958707425776154, 116.44922317658235);
@@ -46,7 +22,8 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
   LatLng lat1 = LatLng(39.959707425776154, 116.45012317658235);
   //机器人A的位置
   LatLng lat2 = LatLng(39.958707425776154, 116.44912317658235);
-
+  //定位信息
+   Location location;
   SmoothMoveMarker _moveMarker;
 
   List<Marker> markers = [];
@@ -82,10 +59,14 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
   }
 
   _reuestData() async {
+    if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
+         location = await AmapLocation.instance.fetchLocation();
+    }
+
     dataList = await ApiService.getRobotListData({
-      "lat": lat2.latitude.toString(),
-      "lng": lat2.longitude.toString(),
-      "distance": "30000"
+      "lat": location.latLng.latitude.toString(),
+      "lng": location.latLng.longitude.toString(),
+      "distance": "3000"
     });
     _addAllRobotMark();
     _startMoveRobot();
@@ -132,7 +113,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markB = await _controller.addMarker(MarkerOption(
               latLng: LatLng(
                   double.parse(model_A.lat), double.parse(model_A.lng) + 0.001),
-              title: model_A.questionVos[count].question,
+              title: Store.value<UserStateModel>(context,listen: false).isLogin() == true? model_A.questionVos[count].question:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
 
@@ -143,7 +124,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
           markA = await _controller.addMarker(MarkerOption(
               latLng:
                   LatLng(double.parse(model_A.lat), double.parse(model_A.lng)),
-              title: model_A.questionVos[count].answers[0].answer,
+              title: Store.value<UserStateModel>(context,listen: false).isLogin() == true? model_A.questionVos[count].answers[0].answer:"...",
               infoWindowEnabled: true,
               iconProvider: AssetImage("images/robots_icon.png")));
           markA.showInfoWindow();
@@ -253,161 +234,6 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
     }
   }
 
-//原点
-  MarkerOption _mark_option1 = MarkerOption(
-      latLng: LatLng(39.958707425776154, 116.44912317658235),
-      title: "你好啊！我是机器人A！",
-      snippet: "小谛",
-      infoWindowEnabled: true,
-      iconProvider: AssetImage("images/robots_icon.png"));
-  MarkerOption _mark_option2 = MarkerOption(
-      latLng: LatLng(39.958707425776154, 116.44922317658235),
-      title: "你好啊！我是机器人B！",
-      snippet: "小谛",
-      infoWindowEnabled: true,
-      iconProvider: AssetImage("images/robots_icon.png"));
-
-  MarkerOption getAddMark(String title, LatLng latlng, [String name]) {
-    return MarkerOption(
-        latLng: latlng,
-        title: title,
-        snippet: name = null ? "" : name,
-        infoWindowEnabled: true,
-        iconProvider: AssetImage("images/robots_icon.png"));
-  }
-
-  _moveBToA() async {
-    //添加平移
-    _moveMarker = await _controller?.addSmoothMoveMarker(
-      SmoothMoveMarkerOption(
-        path: [lat1, lat],
-        iconProvider: AssetImage("images/robots_icon.png"),
-        duration: Duration(seconds: 10),
-      ),
-    );
-    //平移结束
-    Future.delayed(
-      Duration(seconds: 10),
-      () async {
-        await _controller.clear(keepMyLocation: true);
-        Marker mark1 = await _controller.addMarker(_mark_option1);
-        markers.add(mark1);
-        Marker mark2 = await _controller.addMarker(_mark_option2);
-        markers.add(mark2);
-      },
-    ).then((value) async {
-      //平移结束开始弹框
-      Marker markr;
-      Marker markr1;
-      _timer = Timer.periodic(Duration(milliseconds: 3000), (t) async {
-        showBoxA = !showBoxA;
-        count++;
-        if (count == 5) {
-          await _controller.clearMarkers([markers[1]]);
-
-          _moveAToB(markr1);
-
-          return;
-        }
-        if (count > 5) {
-          return;
-        }
-        if (showBoxA == true) {
-          _controller.clearMarkers([markr]);
-          markr = await _controller
-              .addMarker(getAddMark("你好啊,请问你是谁？${count}", lat2));
-          markr.showInfoWindow();
-        } else {
-          _controller.clearMarkers([markr1]);
-          markr1 = await _controller
-              .addMarker(getAddMark("你好啊，我是机器人啊${count}", lat));
-          markr1.showInfoWindow();
-        }
-      });
-    });
-  }
-
-  _moveAToB(Marker m) async {
-    count = 0;
-    _timer.cancel();
-    _timer = null;
-    _controller.clear();
-    _controller.addMarker(_mark_option1);
-    _moveMarker = await _controller?.addSmoothMoveMarker(
-      SmoothMoveMarkerOption(
-        path: [lat, lat1],
-        iconProvider: AssetImage("images/robots_icon.png"),
-        duration: Duration(seconds: 10),
-      ),
-    );
-    Future.delayed(Duration(seconds: 10), () {
-      _controller.clear();
-      _controller.addMarker(_mark_option1);
-      _moveBToA();
-      return "我该返回了";
-    }).then((value) {
-      print(value);
-    });
-  }
-
-  _mapCallBack() async {
-    //添加mark
-    _controller.addMarker(_mark_option1);
-    markerOptionS.add(_mark_option1);
-
-    //点击弹窗
-    _controller.setInfoWindowClickListener(
-      (marker) => _clickInfo(marker),
-    );
-    //点击mark
-    _controller.setMarkerClickedListener((marker) async {
-      // await _controller.showCustomInfoWindow(
-      //   marker,
-      //   Container(
-      //     width: 128,
-      //     height: 60,
-      //     decoration: BoxDecoration(
-      //       color: Colors.yellow,
-      //       borderRadius: BorderRadius.circular(16),
-      //     ),
-      //     child: Text("111"),
-      //   ),
-      // );
-    });
-    _moveBToA();
-
-    //添加widgetmark
-    final marker = await _controller?.addMarkers(
-      [
-        MarkerOption(
-          latLng: getNextLatLng(),
-          widget: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Text('使用Widget作为Marker: $i'),
-              Image.asset('images/robots_icon.png'),
-            ],
-          ),
-          title: '北京zzzzzzzzzzzzzzzzzzz',
-          snippet: '描述',
-        )
-      ],
-    );
-    markers.addAll(marker);
-    //五秒后自动弹框
-    Future.delayed(
-      Duration(seconds: 10),
-      () => {
-        _showBox(markers[0]),
-      },
-    );
-  }
-
-  _showBox(Marker _marker) {
-    // _marker.showInfoWindow();
-    // _moveMarker.showInfoWindow();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -417,7 +243,7 @@ class _RobotWorldHomeState extends State<RobotWorldHome>
               child: Container(
             child: AmapView(
               mapType: MapType.Standard,
-              centerCoordinate: lat,
+              centerCoordinate: location?.latLng??lat,
               showCompass: true,
               showZoomControl: true,
               // showScaleControl: true,

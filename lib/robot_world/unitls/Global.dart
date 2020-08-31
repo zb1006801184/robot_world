@@ -2,6 +2,8 @@ import 'package:robot_world/page_index.dart';
 import 'dart:ui';
 import 'dart:convert';
 
+import 'package:robot_world/robot_world/unitls/sp_util.dart';
+
 const _themes = <MaterialColor>[
   Colors.blue,
   Colors.cyan,
@@ -15,13 +17,13 @@ class Global {
   static const BGCOLOR = Color(0xFFf4f5f7);
   //按钮背景色
   static const BUTTONBGCOLOR = Color(0xFF1F3ABB);
+  //主体风格颜色
+  static const MAINSTYLECOLOR = Color(0xFF00BFD8);
 
   static SharedPreferences _prefs;
   static LoginPerson profile = LoginPerson();
   static FormDataModel fromModel = FormDataModel();
 
-  // 网络缓存对象
-  // static NetCache netCache = NetCache();
 
   // 可选的主题列表
   static List<MaterialColor> get themes => _themes;
@@ -31,14 +33,13 @@ class Global {
   static bool loginState;
   //初始化全局信息，会在APP启动时执行
   static Future init() async {
-    _prefs = await SharedPreferences.getInstance();
-    loginState = _prefs.getBool(DataName.LOGINSTATE);
-    if (loginState != null && loginState == true) {
+    loginState = SpUtil.getBool(DataName.LOGINSTATE);
+    if (loginState == true) {
       print("已登录");
     } else {
       print("未登录");
     }
-    var _profile = _prefs.getString(DataName.PERSONINFO);
+    var _profile = SpUtil.getString(DataName.PERSONINFO);
     if (_profile != null) {
       try {
         profile = LoginPerson.fromJson(jsonDecode(_profile));
@@ -48,19 +49,6 @@ class Global {
     }
   }
 
-  // 如果没有缓存策略，设置默认缓存策略
-  //   profile.cache = profile.cache ?? CacheConfig()
-  //     ..enable = true
-  //     ..maxAge = 3600
-  //     ..maxCount = 100;
-
-  //   //初始化网络请求相关配置
-  //   Git.init();
-  // }
-
-  // 持久化Profile信息
-  // static saveProfile() =>
-  //     _prefs.setString("profile", jsonEncode(profile.toJson()));
 //设备宽高
   static double ksWidth = _width;
   static double ksHeight = _height;

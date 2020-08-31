@@ -2,22 +2,18 @@
 import 'dart:convert';
 
 import 'package:robot_world/page_index.dart';
+import 'package:robot_world/robot_world/store/user_state_model.dart';
 import 'dart:ui';
+
+import 'package:robot_world/robot_world/unitls/sp_util.dart';
 
 class LoginPageView extends StatelessWidget {
   _getLogin(context) async {
     LoginPerson response = await ApiService.login("15070925726", "1234");
     if (response != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool(DataName.LOGINSTATE, true);
-      String data = jsonEncode(response.toJson());
-      prefs.setString(DataName.PERSONINFO, data);
-      Global.profile = response;
+      Store.value<UserStateModel>(context,listen: false).savaUserInfo(response);
       Navigator.pushNamed(context, "/MainRoute");
     }
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setBool(DataName.LOGINSTATE, true);
-    // Navigator.pushNamed(context, "/MainRoute");
   }
 
   @override
@@ -34,10 +30,8 @@ class LoginPageView extends StatelessWidget {
               height: Global.ksToolbarHeight + Global.ksStateHeight,
               child: IconButton(
                 icon: Image.asset('images/nav_icon_close.png'),
-                // padding: EdgeInsets.all(3),
-                // iconSize: 20,
                 onPressed: () {
-                  print("点击了关闭");
+                  Navigator.of(context).pop();
                 },
               ),
             ),
@@ -126,7 +120,7 @@ class LoginPageView extends StatelessWidget {
               height: 48,
               color: const Color(0xFFF4F5F7),
               child: FlatButton(
-                color: Color(0xFF1F3ABB),
+                color: Global.MAINSTYLECOLOR,
                 highlightColor: Colors.blue[700],
                 colorBrightness: Brightness.dark,
                 splashColor: Colors.grey,

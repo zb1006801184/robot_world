@@ -21,3 +21,5 @@ export 'bp_project/unitls/config_data.dart';
 export 'robot_world/ui/nav_bar_base.dart';
 export 'generated/i18n.dart';
 export 'robot_world/unitls/platform_unitls.dart';
+export 'robot_world/unitls/nav_key.dart';
+export 'robot_world/store/provider_store.dart';

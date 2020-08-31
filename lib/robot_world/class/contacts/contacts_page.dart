@@ -24,7 +24,6 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   void loadData() async {
-    
     //加载城市列表
     rootBundle.loadString('data/china.json').then((value) {
       Map countyMap = json.decode(value);
@@ -82,30 +81,40 @@ class _ContactPageState extends State<ContactPage> {
   Widget _buildListItem(CityInfo model) {
     String susTag = model.getSuspensionTag();
     // susTag = (susTag == "★" ? "热门城市" : susTag);
-    return Column(
-      children: <Widget>[
-        Offstage(
-          offstage: model.isShowSuspension != true,
-          child: _buildSusWidget(susTag),
-        ),
-        SizedBox(
-          height: _itemHeight.toDouble(),
-          child: Container(
-            child: Row(children: [
-              Container(
-                margin: EdgeInsets.only(left: 17),
-                height: 42,
-                width: 42,
-                    child: Image(image: AssetImage("images/nav_icon_me.png"),fit: BoxFit.fill,),
+    return InkWell(
+      child: Column(
+        children: <Widget>[
+          Offstage(
+            offstage: model.isShowSuspension != true,
+            child: _buildSusWidget(susTag),
+          ),
+          SizedBox(
+            height: _itemHeight.toDouble(),
+            child: Container(
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 17),
+                    height: 42,
+                    width: 42,
+                    child: Image(
+                      image: AssetImage("images/nav_icon_me.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 14),
+                    child: Text(model.name),
+                  ),
+                ],
               ),
-              Container(
-                margin: EdgeInsets.only(left: 14),
-                child: Text(model.name),
-              ),
-            ],),
+            ),
           )
-        )
-      ],
+        ],
+      ),
+      onTap: () {
+        Navigator.of(context).pushNamed("/BusinessCardPage");
+      },
     );
   }
 
